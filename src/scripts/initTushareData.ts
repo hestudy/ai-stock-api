@@ -1,20 +1,20 @@
-import { client } from '@/utils/client'
 import { getTushareStockList } from '@/utils/tushare/getTushareStockList'
+import { BasePayload } from 'payload'
 
-export const initTushareData = async () => {
-  const count = await client.count({
+export const initTushareData = async (payload: BasePayload) => {
+  const count = await payload.count({
     collection: 'stocks',
   })
 
   if (count.totalDocs === 0) {
     const res = await getTushareStockList()
     if (res.code === 0) {
-      const transactionId = await client.db.beginTransaction()
+      const transactionId = await payload.db.beginTransaction()
 
       try {
         for (let index = 0; index < res.data.items.length; index++) {
           const item = res.data.items[index]
-          await client.create({
+          await payload.create({
             collection: 'stocks',
             data: {
               symbol: item[1] as string,
@@ -39,15 +39,17 @@ export const initTushareData = async () => {
               transactionID: transactionId!,
             },
           })
-          client.logger.info(`初始化股票列表数据: ${index + 1}/${res.data.items.length} ${item[2]}`)
+          payload.logger.info(
+            `初始化股票列表数据: ${index + 1}/${res.data.items.length} ${item[2]}`,
+          )
         }
 
-        await client.db.commitTransaction(transactionId!)
-        client.logger.info('初始化股票列表数据成功')
+        await payload.db.commitTransaction(transactionId!)
+        payload.logger.info('初始化股票列表数据成功')
         return true
       } catch (e) {
-        client.logger.error(e)
-        await client.db.rollbackTransaction(transactionId!)
+        payload.logger.error(e)
+        await payload.db.rollbackTransaction(transactionId!)
         return false
       }
     }
