@@ -1,10 +1,4 @@
-import { storage } from './storage'
-
-type TuShareData = {
-  code: number
-  msg: string
-  data: Record<string, any>
-}
+import { storage } from '../storage'
 
 export const tushare = async (args: {
   api_name: string
@@ -14,7 +8,7 @@ export const tushare = async (args: {
   const storageData = await storage.getItem(`tushare:${args.api_name}`)
 
   if (storageData) {
-    return storageData as TuShareData
+    return storageData
   }
 
   const token = process.env.TUSHARE_TOKEN
@@ -30,7 +24,7 @@ export const tushare = async (args: {
     }),
   })
 
-  const data = (await res.json()) as TuShareData
+  const data = await res.json()
 
   if (data.code !== 0) {
     throw new Error(data.msg)

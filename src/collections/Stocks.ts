@@ -6,7 +6,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'ts_code',
       type: 'text',
-      required: true,
       admin: {
         description: 'TS代码',
       },
@@ -14,7 +13,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'symbol',
       type: 'text',
-      required: true,
       admin: {
         description: '股票代码',
       },
@@ -22,7 +20,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
-      required: true,
       admin: {
         description: '股票名称',
       },
@@ -30,7 +27,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'area',
       type: 'text',
-      required: true,
       admin: {
         description: '地域',
       },
@@ -38,7 +34,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'industry',
       type: 'text',
-      required: true,
       admin: {
         description: '所属行业',
       },
@@ -46,7 +41,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'fullname',
       type: 'text',
-      required: false,
       admin: {
         description: '股票全称',
       },
@@ -54,7 +48,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'enname',
       type: 'text',
-      required: false,
       admin: {
         description: '英文全称',
       },
@@ -62,7 +55,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'cnspell',
       type: 'text',
-      required: true,
       admin: {
         description: '拼音缩写',
       },
@@ -70,7 +62,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'market',
       type: 'text',
-      required: true,
       admin: {
         description: '市场类型',
       },
@@ -78,7 +69,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'exchange',
       type: 'text',
-      required: false,
       admin: {
         description: '交易所代码',
       },
@@ -86,7 +76,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'curr_type',
       type: 'text',
-      required: false,
       admin: {
         description: '交易货币',
       },
@@ -94,23 +83,20 @@ export const Stocks: CollectionConfig = {
     {
       name: 'list_status',
       type: 'text',
-      required: false,
       admin: {
         description: '上市状态 L上市 D退市 P暂停上市',
       },
     },
     {
       name: 'list_date',
-      type: 'date',
-      required: true,
+      type: 'text',
       admin: {
         description: '上市日期',
       },
     },
     {
       name: 'delist_date',
-      type: 'date',
-      required: false,
+      type: 'text',
       admin: {
         description: '退市日期',
       },
@@ -118,7 +104,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'is_hs',
       type: 'text',
-      required: false,
       admin: {
         description: '是否沪深港通标的，N否 H沪股通 S深股通',
       },
@@ -126,7 +111,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'act_name',
       type: 'text',
-      required: true,
       admin: {
         description: '实控人名称',
       },
@@ -134,7 +118,6 @@ export const Stocks: CollectionConfig = {
     {
       name: 'act_ent_type',
       type: 'text',
-      required: true,
       admin: {
         description: '实控人企业性质',
       },
