@@ -11,6 +11,7 @@ import { Media } from './collections/Media'
 import { StockDailys } from './collections/StockDailys'
 import { Stocks } from './collections/Stocks'
 import { Users } from './collections/Users'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -32,6 +33,7 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    prodMigrations: migrations,
   }),
   sharp,
   plugins: [

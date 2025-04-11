@@ -6,23 +6,97 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
+export type SupportedTimezones =
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
   };
+  blocks: {};
   collections: {
     users: User;
     media: Media;
+    stocks: Stock;
+    'stock-dailys': StockDaily;
+    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsJoins: {};
+  collectionsSelect: {
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    stocks: StocksSelect<false> | StocksSelect<true>;
+    'stock-dailys': StockDailysSelect<false> | StockDailysSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: string;
+    defaultIDType: number;
   };
   globals: {};
+  globalsSelect: {};
   locale: null;
   user: User & {
     collection: 'users';
+  };
+  jobs: {
+    tasks: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -48,7 +122,7 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: string;
+  id: number;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -65,7 +139,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: number;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -81,13 +155,174 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stocks".
+ */
+export interface Stock {
+  id: number;
+  /**
+   * TS代码
+   */
+  ts_code: string;
+  /**
+   * 股票代码
+   */
+  symbol: string;
+  /**
+   * 股票名称
+   */
+  name: string;
+  /**
+   * 地域
+   */
+  area: string;
+  /**
+   * 所属行业
+   */
+  industry: string;
+  /**
+   * 股票全称
+   */
+  fullname?: string | null;
+  /**
+   * 英文全称
+   */
+  enname?: string | null;
+  /**
+   * 拼音缩写
+   */
+  cnspell: string;
+  /**
+   * 市场类型
+   */
+  market: string;
+  /**
+   * 交易所代码
+   */
+  exchange?: string | null;
+  /**
+   * 交易货币
+   */
+  curr_type?: string | null;
+  /**
+   * 上市状态 L上市 D退市 P暂停上市
+   */
+  list_status?: string | null;
+  /**
+   * 上市日期
+   */
+  list_date: string;
+  /**
+   * 退市日期
+   */
+  delist_date?: string | null;
+  /**
+   * 是否沪深港通标的，N否 H沪股通 S深股通
+   */
+  is_hs?: string | null;
+  /**
+   * 实控人名称
+   */
+  act_name: string;
+  /**
+   * 实控人企业性质
+   */
+  act_ent_type: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stock-dailys".
+ */
+export interface StockDaily {
+  id: number;
+  /**
+   * 股票代码
+   */
+  ts_code: string;
+  /**
+   * 交易日期
+   */
+  trade_date: string;
+  /**
+   * 开盘价
+   */
+  open: number;
+  /**
+   * 最高价
+   */
+  high: number;
+  /**
+   * 最低价
+   */
+  low: number;
+  /**
+   * 收盘价
+   */
+  close: number;
+  /**
+   * 昨收价【除权价，前复权】
+   */
+  pre_close: number;
+  /**
+   * 涨跌额
+   */
+  change: number;
+  /**
+   * 涨跌幅【基于除权后的昨收计算的涨跌幅：（今收-除权昨收）/除权昨收】
+   */
+  pct_chg: number;
+  /**
+   * 成交量（手）
+   */
+  vol: number;
+  /**
+   * 成交额（千元）
+   */
+  amount: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: number;
+  document?:
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'stocks';
+        value: number | Stock;
+      } | null)
+    | ({
+        relationTo: 'stock-dailys';
+        value: number | StockDaily;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: number;
   user: {
     relationTo: 'users';
-    value: string | User;
+    value: number | User;
   };
   key?: string | null;
   value?:
@@ -107,11 +342,120 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
+  id: number;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stocks_select".
+ */
+export interface StocksSelect<T extends boolean = true> {
+  ts_code?: T;
+  symbol?: T;
+  name?: T;
+  area?: T;
+  industry?: T;
+  fullname?: T;
+  enname?: T;
+  cnspell?: T;
+  market?: T;
+  exchange?: T;
+  curr_type?: T;
+  list_status?: T;
+  list_date?: T;
+  delist_date?: T;
+  is_hs?: T;
+  act_name?: T;
+  act_ent_type?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stock-dailys_select".
+ */
+export interface StockDailysSelect<T extends boolean = true> {
+  ts_code?: T;
+  trade_date?: T;
+  open?: T;
+  high?: T;
+  low?: T;
+  close?: T;
+  pre_close?: T;
+  change?: T;
+  pct_chg?: T;
+  vol?: T;
+  amount?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
