@@ -1,7 +1,7 @@
 import { getTushareStockList } from '@/utils/tushare/getTushareStockList'
 import { BasePayload } from 'payload'
 
-export const initTushareData = async (payload: BasePayload) => {
+export const seedTushareData = async (payload: BasePayload) => {
   const count = await payload.count({
     collection: 'stocks',
   })

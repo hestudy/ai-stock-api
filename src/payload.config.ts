@@ -40,4 +40,10 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
+  bin: [
+    {
+      scriptPath: path.resolve(dirname, 'scripts/seed.ts'),
+      key: 'seed',
+    },
+  ],
 })
