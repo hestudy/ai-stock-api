@@ -6,15 +6,13 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'ts_code',
       type: 'text',
-      required: true,
       admin: {
         description: '股票代码',
       },
     },
     {
       name: 'trade_date',
-      type: 'date',
-      required: true,
+      type: 'text',
       admin: {
         description: '交易日期',
       },
@@ -22,7 +20,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'open',
       type: 'number',
-      required: true,
       admin: {
         description: '开盘价',
       },
@@ -30,7 +27,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'high',
       type: 'number',
-      required: true,
       admin: {
         description: '最高价',
       },
@@ -38,7 +34,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'low',
       type: 'number',
-      required: true,
       admin: {
         description: '最低价',
       },
@@ -46,7 +41,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'close',
       type: 'number',
-      required: true,
       admin: {
         description: '收盘价',
       },
@@ -54,7 +48,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'pre_close',
       type: 'number',
-      required: true,
       admin: {
         description: '昨收价【除权价，前复权】',
       },
@@ -62,7 +55,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'change',
       type: 'number',
-      required: true,
       admin: {
         description: '涨跌额',
       },
@@ -70,7 +62,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'pct_chg',
       type: 'number',
-      required: true,
       admin: {
         description: '涨跌幅【基于除权后的昨收计算的涨跌幅：（今收-除权昨收）/除权昨收】',
       },
@@ -78,7 +69,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'vol',
       type: 'number',
-      required: true,
       admin: {
         description: '成交量（手）',
       },
@@ -86,7 +76,6 @@ export const StockDailys: CollectionConfig = {
     {
       name: 'amount',
       type: 'number',
-      required: true,
       admin: {
         description: '成交额（千元）',
       },
