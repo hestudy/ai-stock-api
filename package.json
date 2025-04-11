@@ -13,7 +13,8 @@
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
-    "test": "vitest"
+    "test": "vitest",
+    "init": "tsx --no-warnings --env-file=.env ./src/scripts/init.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "3.33.0",
@@ -38,6 +39,7 @@
     "eslint": "^9.16.0",
     "eslint-config-next": "15.3.0",
     "prettier": "^3.4.2",
+    "tsx": "^4.19.3",
     "typescript": "5.7.3",
     "vite": "^6.2.6",
     "vitest": "^3.1.1"

@@ -1,5 +1,4 @@
-import { initTushareData } from '@/scripts/initTushareData'
-import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+import { MigrateDownArgs, MigrateUpArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
@@ -27,8 +26,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   ALTER TABLE "stock_dailys" ALTER COLUMN "pct_chg" DROP NOT NULL;
   ALTER TABLE "stock_dailys" ALTER COLUMN "vol" DROP NOT NULL;
   ALTER TABLE "stock_dailys" ALTER COLUMN "amount" DROP NOT NULL;`)
-
-  await initTushareData(payload)
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {

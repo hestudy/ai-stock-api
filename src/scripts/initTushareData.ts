@@ -54,5 +54,7 @@ export const initTushareData = async (payload: BasePayload) => {
       }
     }
   }
+
+  payload.logger.info('股票列表数据已存在')
   return true
 }
