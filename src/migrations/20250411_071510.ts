@@ -1,4 +1,3 @@
-import { initTushareData } from '@/scripts/initTushareData'
 import { MigrateDownArgs, MigrateUpArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
@@ -185,8 +184,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX IF NOT EXISTS "payload_preferences_rels_users_id_idx" ON "payload_preferences_rels" USING btree ("users_id");
   CREATE INDEX IF NOT EXISTS "payload_migrations_updated_at_idx" ON "payload_migrations" USING btree ("updated_at");
   CREATE INDEX IF NOT EXISTS "payload_migrations_created_at_idx" ON "payload_migrations" USING btree ("created_at");`)
-
-  await initTushareData(payload)
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {

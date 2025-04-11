@@ -162,23 +162,23 @@ export interface Stock {
   /**
    * TS代码
    */
-  ts_code: string;
+  ts_code?: string | null;
   /**
    * 股票代码
    */
-  symbol: string;
+  symbol?: string | null;
   /**
    * 股票名称
    */
-  name: string;
+  name?: string | null;
   /**
    * 地域
    */
-  area: string;
+  area?: string | null;
   /**
    * 所属行业
    */
-  industry: string;
+  industry?: string | null;
   /**
    * 股票全称
    */
@@ -190,11 +190,11 @@ export interface Stock {
   /**
    * 拼音缩写
    */
-  cnspell: string;
+  cnspell?: string | null;
   /**
    * 市场类型
    */
-  market: string;
+  market?: string | null;
   /**
    * 交易所代码
    */
@@ -210,7 +210,7 @@ export interface Stock {
   /**
    * 上市日期
    */
-  list_date: string;
+  list_date?: string | null;
   /**
    * 退市日期
    */
@@ -222,11 +222,11 @@ export interface Stock {
   /**
    * 实控人名称
    */
-  act_name: string;
+  act_name?: string | null;
   /**
    * 实控人企业性质
    */
-  act_ent_type: string;
+  act_ent_type?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -239,47 +239,47 @@ export interface StockDaily {
   /**
    * 股票代码
    */
-  ts_code: string;
+  ts_code?: string | null;
   /**
    * 交易日期
    */
-  trade_date: string;
+  trade_date?: string | null;
   /**
    * 开盘价
    */
-  open: number;
+  open?: number | null;
   /**
    * 最高价
    */
-  high: number;
+  high?: number | null;
   /**
    * 最低价
    */
-  low: number;
+  low?: number | null;
   /**
    * 收盘价
    */
-  close: number;
+  close?: number | null;
   /**
    * 昨收价【除权价，前复权】
    */
-  pre_close: number;
+  pre_close?: number | null;
   /**
    * 涨跌额
    */
-  change: number;
+  change?: number | null;
   /**
    * 涨跌幅【基于除权后的昨收计算的涨跌幅：（今收-除权昨收）/除权昨收】
    */
-  pct_chg: number;
+  pct_chg?: number | null;
   /**
    * 成交量（手）
    */
-  vol: number;
+  vol?: number | null;
   /**
    * 成交额（千元）
    */
-  amount: number;
+  amount?: number | null;
   updatedAt: string;
   createdAt: string;
 }
