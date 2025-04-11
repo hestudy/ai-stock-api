@@ -1,16 +1,8 @@
-import { storage } from '../storage'
-
 export const tushare = async (args: {
   api_name: string
   params: Record<string, any>
   fields?: string[]
 }) => {
-  const storageData = await storage.getItem(`tushare:${args.api_name}`)
-
-  if (storageData) {
-    return storageData
-  }
-
   const token = process.env.TUSHARE_TOKEN
   const url = 'https://api.tushare.pro'
 
@@ -25,12 +17,6 @@ export const tushare = async (args: {
   })
 
   const data = await res.json()
-
-  if (data.code !== 0) {
-    throw new Error(data.msg)
-  }
-
-  await storage.setItem(`tushare:${args.api_name}`, data)
 
   return data
 }

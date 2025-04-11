@@ -1,4 +1,4 @@
-import { Stock } from '@/payload-types'
+import { storage } from '../storage'
 import { tushare } from './tushare'
 
 type TuShareData = {
@@ -13,6 +13,12 @@ type TuShareData = {
 }
 
 export const getTushareStockList = async () => {
+  const storageData = await storage.getItem(`tushare:stock_basic`)
+
+  if (storageData) {
+    return storageData as TuShareData
+  }
+
   const res = await tushare({
     api_name: 'stock_basic',
     params: {},
@@ -36,5 +42,12 @@ export const getTushareStockList = async () => {
       'act_ent_type',
     ],
   })
+
+  if (res.code !== 0) {
+    throw new Error(res.msg)
+  }
+
+  await storage.setItem(`tushare:stock_basic`, res)
+
   return res as TuShareData
 }

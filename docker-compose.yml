@@ -9,3 +9,5 @@ services:
       - DATABASE_URI=${DATABASE_URI}
       - PAYLOAD_SECRET=${PAYLOAD_SECRET}
       - TUSHARE_TOKEN=${TUSHARE_TOKEN}
+    volumes:
+      - ./data:/app/.data
